@@ -15,6 +15,6 @@ try {
     console.error(e)
 }
 
-let ewcDatabase = connection.db("EWC")
+let ewcDatabase = connection.db("EWCDatabase")
 
 export default ewcDatabase;
