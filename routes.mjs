@@ -16,14 +16,14 @@ router.get('/search/glossary/', async (req, res) => {
     let result = await glossary.findOne(query);
 
     if (!result) {
-        res.send("The term you searched does not exist in the glossary. Maybe you can add it!").status(202)
+        res.send("The term you searched does not exist in the glossary. Maybe you can add it!").status(404)
     } else {
         res.send(result).status(200)
     }
 });
 
 // Post request to insert / update entries in the database
-router.post('/add/glossary', async (req, res) => {
+router.post('/add/glossary/', async (req, res) => {
     const glossary = await ewcDatabase.collection('Glossary');
     const entry = req.body;
 
@@ -33,21 +33,21 @@ router.post('/add/glossary', async (req, res) => {
 
     // if any of the information is missing, then we don't proceed
     if (!entry || !entry.term || !entry.definition || !entry.category) {
-        ret['status'] = 201;
+        ret['status'] = 400;
         ret['msg'] = "Entry is incomplete";
-        res.send(ret).status(201);
+        res.send(ret).status(400);
         return;
     }
-
-    ret['status'] = 200; // otherwise everything should be fine so we set status to 200
 
     // update the entry if it exists or insert a new entry if it doesn't exist
     let result = await glossary.updateOne(query, info, {upsert: true});
 
     // if there is a matched entry, then its an update, and if no match, then its an insert
     if (result.matchedCount === 0) {
+        ret['status'] = 201
         ret['msg'] = `${entry.term} was added to the glossary.`;
     } else {
+        ret['status'] = 200
         ret['msg'] = `${entry.term} was updated`;
     }
 
@@ -55,11 +55,10 @@ router.post('/add/glossary', async (req, res) => {
 });
 
 // Delete request to delete an entry from the database
-router.delete('/delete/glossary', async (req, res) => {
+router.delete('/delete/glossary/', async (req, res) => {
     const glossary = await ewcDatabase.collection('Glossary');
-    const entry = req.body;
+    const query = req.body;
 
-    let query = {term: entry.term};
     let result = await glossary.deleteOne(query);
 
     let ret = {
@@ -68,7 +67,7 @@ router.delete('/delete/glossary', async (req, res) => {
     };
     
     if (result.deletedCount === 0) {
-        ret['status'] = 202;
+        ret['status'] = 404;
         ret['msg'] = `${entry.term} is not in the glossary!`;
     } else {
         ret['status'] = 200;
