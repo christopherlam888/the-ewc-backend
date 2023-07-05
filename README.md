@@ -89,7 +89,7 @@ The request body should contain a JSON object that is able to specify the entry 
 The object should have the following proerties:
 * (str) term (optional): the term for the entry
 * (str) definition (optional): the definition for the entry
-* (str) category (optional): the category of the term, either "general" or "brand"
+* (str) category (optional): the category of the term, either "general" or "brand"  
 **Response:**
 * 200 OK - the entry was deleted successfull, the response body will contain the status code and a message indicating success.
 * 404 Not Found - the entry was not found, and so could not be deleted, the response body will containg a message indicating so.
