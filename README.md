@@ -2,14 +2,14 @@
 
 This is the backend for the Everday Watch Collector applications, including the contributions page and the app. It includes the MongoDB server and the API written in Express.
 
-## API Documentation
-### Overview
+# API Documentation
+## Overview
 The EWC API is used to perform CRUD operations on the MongoDB database containing the glossary terms (and videos too at some point later) from the EWC Youtube Channel. The 'create', 'update', and 'delete' operations is primarily used by the EWC contributions page and the 'read' operation will be used by the app.
 
-### Endpoints
+## Endpoints
 Base url: http://localhost:5050/api
 
-#### **Search Glossary**
+### **Search Glossary**
 This endpoint (currently only supports) querying EWCDatabase for specific terms in the Glossary.  
 **URL:** /search/glossary/  
 **Method:** GET  
@@ -39,7 +39,7 @@ Response (200 OK):
 }
 ```
 
-#### **Add Term**
+### **Add Term**
 This endpoint allows users to add a new term or update a term if it already exists in the Glossary.  
 **URL:** /add/glossary/  
 **Method:** POST  
@@ -83,7 +83,7 @@ Response (200 OK):
 }
 ```
 
-#### **Delete Term**
+### **Delete Term**
 This endpoint allows users to delete an entry from the Glossary
 **URL:** /delete/glossary/  
 **Method:** DELETE  
@@ -122,11 +122,11 @@ Response (200 OK):
 }
 ```
 
-## Features to Implement
+# Features to Implement
 * Implement GET request for search glossary based on term category
 * Allow for CRUD operations on the Videos collection in the EWCDatabase
 
-## License
+# License
 [![GNU GPLv3 Image](https://www.gnu.org/graphics/gplv3-127x51.png)](https://www.gnu.org/licenses/gpl-3.0.en.html)  
 
 This project is licensed under the GNU General Public License v3.0.
