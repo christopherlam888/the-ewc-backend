@@ -14,7 +14,8 @@ This endpoint (currently only supports) querying EWCDatabase for specific terms 
 **URL:** /search/glossary/  
 **Method:** GET  
 **Parameters:**
-* (str) term (required): the term that will be searched.  
+* (str) term (required): the term that will be searched.
+
 **Response:**
 * 200 OK - the term is found, the response body will contain the Glossary entry for the term
 * 404 Not Found - the term is not found, the response body will contain a message indicating that it doesn't exist
