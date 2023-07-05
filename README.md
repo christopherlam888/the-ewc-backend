@@ -11,7 +11,7 @@ Base url: http://localhost:5050/api
 
 #### **Search Glossary**
 This endpoint (currently only supports) querying EWCDatabase for specific terms in the Glossary.  
-**url:** /search/glossary/  
+**URL:** /search/glossary/  
 **Method:** GET  
 **Parameters:**
 * (str) term (required): the term that will be searched.  
@@ -39,7 +39,7 @@ Response (200 OK):
 
 #### **Add Term**
 This endpoint allows users to add a new term or update a term if it already exists in the Glossary.
-**url:** /add/glossary/
+**URL:** /add/glossary/
 **Method:** POST
 **Request Body:**
 The request body should contain a JSON object representing the Glossary entry to be inserted or updated in the database.  
@@ -82,7 +82,7 @@ Response (200 OK):
 
 #### **Delete Term**
 This endpoint allows users to delete an entry from the Glossary
-**url:** /delete/glossary/
+**URL:** /delete/glossary/
 **Method:** DELETE
 **Request Body:**
 The request body should contain a JSON object that is able to specify the entry enough to locate it within the database. This will usually be the term, which is assumed to be unique.  
