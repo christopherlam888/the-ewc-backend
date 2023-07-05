@@ -14,11 +14,12 @@ This endpoint (currently only supports) querying EWCDatabase for specific terms 
 **URL:** /search/glossary/  
 **Method:** GET  
 **Parameters:**
-* (str) term (required): the term that will be searched.
+* (str) term (required): the term that will be searched.  
 
 **Response:**
 * 200 OK - the term is found, the response body will contain the Glossary entry for the term
 * 404 Not Found - the term is not found, the response body will contain a message indicating that it doesn't exist
+
 **Example:**  
 Request:
 ```javascript
@@ -53,7 +54,8 @@ The object should have the following properties:
 * 200 OK - the entry was updated successfully, the response body will contain the status code and a message indicating success
 * 201 Created - the entry was newly added, the response body will contain the status code and a message indicating success
 * 400 Bad Request - the request body was not formatted properly / is missing required information, the response body will contain the status code and  
-                    a message indicating the information is incomplete  
+                    a message indicating the information is incomplete
+  
 **Example:**  
 Request:
 ```javascript
@@ -93,7 +95,8 @@ The object should have the following proerties:
 * (str) category (optional): the category of the term, either "general" or "brand"  
 **Response:**
 * 200 OK - the entry was deleted successfull, the response body will contain the status code and a message indicating success.
-* 404 Not Found - the entry was not found, and so could not be deleted, the response body will containg a message indicating so.  
+* 404 Not Found - the entry was not found, and so could not be deleted, the response body will containg a message indicating so.
+
 **Example:**
 Request:
 ```javascript
