@@ -18,7 +18,7 @@ This endpoint (currently only supports) querying EWCDatabase for specific terms 
 **Response:**
 * 200 OK - the term is found, the response body will contain the Glossary entry for the term
 * 404 Not Found - the term is not found, the response body will contain a message indicating that it doesn't exist
-**Example:**
+**Example:**  
 Request:
 ```javascript
 const term = 'Tissot';
@@ -38,22 +38,22 @@ Response (200 OK):
 ```
 
 #### **Add Term**
-This endpoint allows users to add a new term or update a term if it already exists in the Glossary.
-**URL:** /add/glossary/
-**Method:** POST
+This endpoint allows users to add a new term or update a term if it already exists in the Glossary.  
+**URL:** /add/glossary/  
+**Method:** POST  
 **Request Body:**
 The request body should contain a JSON object representing the Glossary entry to be inserted or updated in the database.  
-The object should have the following properties:
+The object should have the following properties:  
 * (str) term (required): the term for the entry
 * (str) definition (required): the definition for the entry
-* (str) category (required): the category of the term, either "general" or "brand"
-(img option will be added later)
-**Response:**
+* (str) category (required): the category of the term, either "general" or "brand"  
+(img option will be added later)  
+**Response:**  
 * 200 OK - the entry was updated successfully, the response body will contain the status code and a message indicating success
 * 201 Created - the entry was newly added, the response body will contain the status code and a message indicating success
 * 400 Bad Request - the request body was not formatted properly / is missing required information, the response body will contain the status code and  
-                    a message indicating the information is incomplete
-**Example:**
+                    a message indicating the information is incomplete  
+**Example:**  
 Request:
 ```javascript
 const entry = {
@@ -82,9 +82,9 @@ Response (200 OK):
 
 #### **Delete Term**
 This endpoint allows users to delete an entry from the Glossary
-**URL:** /delete/glossary/
-**Method:** DELETE
-**Request Body:**
+**URL:** /delete/glossary/  
+**Method:** DELETE  
+**Request Body:**  
 The request body should contain a JSON object that is able to specify the entry enough to locate it within the database. This will usually be the term, which is assumed to be unique.  
 The object should have the following proerties:
 * (str) term (optional): the term for the entry
@@ -92,7 +92,7 @@ The object should have the following proerties:
 * (str) category (optional): the category of the term, either "general" or "brand"  
 **Response:**
 * 200 OK - the entry was deleted successfull, the response body will contain the status code and a message indicating success.
-* 404 Not Found - the entry was not found, and so could not be deleted, the response body will containg a message indicating so.
+* 404 Not Found - the entry was not found, and so could not be deleted, the response body will containg a message indicating so.  
 **Example:**
 Request:
 ```javascript
