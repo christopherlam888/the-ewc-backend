@@ -7,74 +7,102 @@ import ewcDatabase from "./database.mjs";
 
 const router = express.Router()
 
-// Get request to retrieve information from the database
+// GET request to retrieve all glossary information from the database
+router.get('/all/glossary/', async (req, res) => {
+  const glossary = await ewcDatabase.collection('Glossary');
+
+  let result = await glossary.find().toArray();
+
+  if (!result) {
+    res.send("The glossary could not be found!").status(404)
+  } else {
+    res.send(result).status(200)
+  }
+});
+
+// GET request to retrieve filtered glossary information from the database
+router.get('/filter/glossary/', async (req, res) => {
+  const glossary = await ewcDatabase.collection('Glossary');
+  const category = req.query.category;
+  let query = { category: category };
+
+  let result = await glossary.find(query).toArray();
+
+  if (!result) {
+    res.send("The category you searched does not exist in the glossary!").status(404)
+  } else {
+    res.send(result).status(200)
+  }
+});
+
+// GET request to retrieve a searched glossary term from the database
 router.get('/search/glossary/', async (req, res) => {
-    const glossary = await ewcDatabase.collection('Glossary');
-    const term = req.query.term;
-    let query = {term: term};
+  const glossary = await ewcDatabase.collection('Glossary');
+  const term = req.query.term;
+  let query = { term: term };
 
-    let result = await glossary.findOne(query);
+  let result = await glossary.findOne(query);
 
-    if (!result) {
-        res.send("The term you searched does not exist in the glossary. Maybe you can add it!").status(404)
-    } else {
-        res.send(result).status(200)
-    }
+  if (!result) {
+    res.send("The term you searched does not exist in the glossary. Maybe you can add it!").status(404)
+  } else {
+    res.send(result).status(200)
+  }
 });
 
-// Post request to insert / update entries in the database
+// POST request to insert/update a glossary term in the database
 router.post('/add/glossary/', async (req, res) => {
-    const glossary = await ewcDatabase.collection('Glossary');
-    const entry = req.body;
+  const glossary = await ewcDatabase.collection('Glossary');
+  const entry = req.body;
 
-    let query = { term: entry.term };
-    let info = { $set: entry};
-    let ret = {};
+  let query = { term: entry.term };
+  let info = { $set: entry };
+  let ret = {};
 
-    // if any of the information is missing, then we don't proceed
-    if (!entry || !entry.term || !entry.definition || !entry.category) {
-        ret['status'] = 400;
-        ret['msg'] = "Entry is incomplete";
-        res.send(ret).status(400);
-        return;
-    }
+  // If any of the information is missing, then we don't proceed
+  if (!entry || !entry.term || !entry.definition || !entry.category) {
+    ret['status'] = 400;
+    ret['msg'] = "Entry is incomplete.";
+    res.send(ret).status(400);
+    return;
+  }
 
-    // update the entry if it exists or insert a new entry if it doesn't exist
-    let result = await glossary.updateOne(query, info, {upsert: true});
+  // Update the entry if it exists or insert a new entry if it doesn't exist
+  let result = await glossary.updateOne(query, info, { upsert: true });
 
-    // if there is a matched entry, then its an update, and if no match, then its an insert
-    if (result.matchedCount === 0) {
-        ret['status'] = 201
-        ret['msg'] = `${entry.term} was added to the glossary.`;
-    } else {
-        ret['status'] = 200
-        ret['msg'] = `${entry.term} was updated`;
-    }
+  // If there is a matched entry, then its an update, and if no match, then its an insert
+  if (result.matchedCount === 0) {
+    ret['status'] = 201
+    ret['msg'] = `${entry.term} was added to the glossary.`;
+  } else {
+    ret['status'] = 200
+    ret['msg'] = `${entry.term} was updated.`;
+  }
 
-    res.send(ret).status(ret['status']);
+  res.send(ret).status(ret['status']);
 });
 
-// Delete request to delete an entry from the database
+// DELETE request to delete an glossary term from the database
 router.delete('/delete/glossary/', async (req, res) => {
-    const glossary = await ewcDatabase.collection('Glossary');
-    const query = req.body;
+  const glossary = await ewcDatabase.collection('Glossary');
+  const query = req.body;
 
-    let result = await glossary.deleteOne(query);
+  let result = await glossary.deleteOne(query);
 
-    let ret = {
-        'status': 200,
-        'msg': ""
-    };
-    
-    if (result.deletedCount === 0) {
-        ret['status'] = 404;
-        ret['msg'] = `${entry.term} is not in the glossary!`;
-    } else {
-        ret['status'] = 200;
-        ret['msg'] = `${entry.term} was deleted`;
-    }
+  let ret = {
+    'status': 200,
+    'msg': ""
+  };
 
-    res.send(ret).status(ret['status']);
+  if (result.deletedCount === 0) {
+    ret['status'] = 404;
+    ret['msg'] = `${entry.term} is not in the glossary!`;
+  } else {
+    ret['status'] = 200;
+    ret['msg'] = `${entry.term} was deleted.`;
+  }
+
+  res.send(ret).status(ret['status']);
 });
 
 export default router;
