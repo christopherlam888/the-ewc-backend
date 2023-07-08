@@ -8,7 +8,7 @@ import ewcDatabase from "./database.mjs";
 const router = express.Router()
 
 // GET request to retrieve all glossary information from the database
-router.get('/all/glossary/', async (req, res) => {
+router.get('/glossary/all/', async (req, res) => {
   const glossary = await ewcDatabase.collection('Glossary');
 
   let result = await glossary.find().toArray();
@@ -21,7 +21,7 @@ router.get('/all/glossary/', async (req, res) => {
 });
 
 // GET request to retrieve filtered glossary information from the database
-router.get('/filter/glossary/', async (req, res) => {
+router.get('/glossary/filter/', async (req, res) => {
   const glossary = await ewcDatabase.collection('Glossary');
   const category = req.query.category;
   let query = { category: category };
@@ -36,7 +36,7 @@ router.get('/filter/glossary/', async (req, res) => {
 });
 
 // GET request to retrieve a searched glossary term from the database
-router.get('/search/glossary/', async (req, res) => {
+router.get('/glossary/search/', async (req, res) => {
   const glossary = await ewcDatabase.collection('Glossary');
   const term = req.query.term;
   let query = { term: term };
@@ -51,7 +51,7 @@ router.get('/search/glossary/', async (req, res) => {
 });
 
 // POST request to insert/update a glossary term in the database
-router.post('/add/glossary/', async (req, res) => {
+router.post('/glossary/add/', async (req, res) => {
   const glossary = await ewcDatabase.collection('Glossary');
   const entry = req.body;
 
@@ -83,7 +83,7 @@ router.post('/add/glossary/', async (req, res) => {
 });
 
 // DELETE request to delete an glossary term from the database
-router.delete('/delete/glossary/', async (req, res) => {
+router.delete('/glossary/delete/', async (req, res) => {
   const glossary = await ewcDatabase.collection('Glossary');
   const query = req.body;
 
