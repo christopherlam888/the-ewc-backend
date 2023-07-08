@@ -3,7 +3,7 @@
 //    * Entries into the database are correct
 
 import express from "express";
-import ewcDatabase from "./database.mjs";
+import ewcDatabase from "./database.js";
 
 const router = express.Router()
 

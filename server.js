@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import routes from "./routes.mjs";
+import routes from "./routes.js";
 import dotenv from "dotenv";
 
 // Load variables
@@ -16,5 +16,5 @@ app.use('/api', routes);
 
 // Start the server
 app.listen(port, () => {
-    console.log(`Sever is running on port: ${port}`)
+  console.log(`Sever is running on port: ${port}`)
 });
