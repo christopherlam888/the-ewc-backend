@@ -13,6 +13,20 @@ router.get('/glossary/all/', async (req, res) => {
 
   let result = await glossary.find().toArray();
 
+  // Sorting the array alphabetically by the 'term' property
+  result.sort(function(a, b) {
+    let termA = a.term;
+    let termB = b.term;
+
+    if (termA < termB) {
+      return -1;
+    }
+    if (termA > termB) {
+      return 1;
+    }
+    return 0;
+  });
+
   if (!result) {
     res.send("The glossary could not be found!").status(404)
   } else {
@@ -27,6 +41,20 @@ router.get('/glossary/filter/', async (req, res) => {
   let query = { category: category };
 
   let result = await glossary.find(query).toArray();
+
+  // Sorting the array alphabetically by the 'term' property
+  result.sort(function(a, b) {
+    let termA = a.term;
+    let termB = b.term;
+
+    if (termA < termB) {
+      return -1;
+    }
+    if (termA > termB) {
+      return 1;
+    }
+    return 0;
+  });
 
   if (!result) {
     res.send("The category you searched does not exist in the glossary!").status(404)
