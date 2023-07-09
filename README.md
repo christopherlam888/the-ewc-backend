@@ -19,7 +19,7 @@ Base URL: https://drab-rose-yak-gear.cyclic.app/the-ewc/api/
 
 Or if you are running the database locally:
 
-Base URL: http://localhost:5050/api
+Base URL: http://localhost:5050/the-ewc/api/
 
 ### **All Glossary Terms**
 
