@@ -124,10 +124,10 @@ router.delete('/glossary/delete/', async (req, res) => {
 
   if (result.deletedCount === 0) {
     ret['status'] = 404;
-    ret['msg'] = `${entry.term} is not in the glossary!`;
+    ret['msg'] = `${query.term} is not in the glossary!`;
   } else {
     ret['status'] = 200;
-    ret['msg'] = `${entry.term} was deleted.`;
+    ret['msg'] = `${query.term} was deleted.`;
   }
 
   res.send(ret).status(ret['status']);
