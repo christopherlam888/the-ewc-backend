@@ -190,7 +190,7 @@ Request:
 const entry = {
   term: 'Rolex'
 };
-fetch('http://localhost:5050/api/glossary/delete/', {
+fetch('http://localhost:5050/the-ewc/api/glossary/delete/', {
   method: 'DELETE',
   headers: {
     'Content-Type': 'application/json'
